@@ -1,3 +1,5 @@
+![Definition statement](../docs/Definition%20Statement%20Dinner%20Spinner.pdf)
+
 ![mural board dinner spinner](../docs/Dinner%20Spinner_2024-02-11_18-04-07.pdf)
 
 ![user flow diagram](../docs/Dinner%20Spinner.drawio.png)

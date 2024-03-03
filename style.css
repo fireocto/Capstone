@@ -55,38 +55,4 @@ input[type=submit]:hover {
 }
 
 
-/* CSS HEX
---chocolate-cosmos: #4c061dff;
---yinmn-blue: #4a5899ff;
---moonstone: #559cadff;
 
-/* CSS HSL */
---chocolate-cosmos: hsla(340, 85%, 16%, 1);
---yinmn-blue: hsla(229, 35%, 45%, 1);
---moonstone: hsla(192, 35%, 51%, 1);
-
-/* SCSS HEX */
-$chocolate-cosmos: #4c061dff;
-$yinmn-blue: #4a5899ff;
-$moonstone: #559cadff;
-
-/* SCSS HSL */
-$chocolate-cosmos: hsla(340, 85%, 16%, 1);
-$yinmn-blue: hsla(229, 35%, 45%, 1);
-$moonstone: hsla(192, 35%, 51%, 1);
-
-/* SCSS RGB */
-$chocolate-cosmos: rgba(76, 6, 29, 1);
-$yinmn-blue: rgba(74, 88, 153, 1);
-$moonstone: rgba(85, 156, 173, 1);
-
-/* SCSS Gradient */
-$gradient-top: linear-gradient(0deg, #4c061dff, #4a5899ff, #559cadff);
-$gradient-right: linear-gradient(90deg, #4c061dff, #4a5899ff, #559cadff);
-$gradient-bottom: linear-gradient(180deg, #4c061dff, #4a5899ff, #559cadff);
-$gradient-left: linear-gradient(270deg, #4c061dff, #4a5899ff, #559cadff);
-$gradient-top-right: linear-gradient(45deg, #4c061dff, #4a5899ff, #559cadff);
-$gradient-bottom-right: linear-gradient(135deg, #4c061dff, #4a5899ff, #559cadff);
-$gradient-top-left: linear-gradient(225deg, #4c061dff, #4a5899ff, #559cadff);
-$gradient-bottom-left: linear-gradient(315deg, #4c061dff, #4a5899ff, #559cadff);
-$gradient-radial: radial-gradient(#4c061dff, #4a5899ff, #559cadff); */

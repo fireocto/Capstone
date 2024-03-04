@@ -1,8 +1,49 @@
 * {
-  box-sizing: border-box;
 }
 
+body {
+  display: flex;
+  background-color: #C75146;
+  border: 20px solid;
+  border-color: #131200;
+  padding: 20px;
+}
+#jumbotron {
+  display: flex;
+  justify-content: center;
+}
+
+.flexbox-container {
+  background-color: #FCBA04;
+}
+.headshot {
+  display: flex;
+  height: auto;
+  width: auto;
+}
+
+header {
+  display: flex;
+  background-color: #FCBA04;
+  border-radius: 20px;
+  margin-left: 300px;
+  margin-right: 300px;
+  justify-content: center;
+}
+
+@media (max-width: 549px){
+  .hidden--mobile {
+    display: none !important;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
 /* Style inputs */
+
+
 input[type=text], select, textarea {
   width: 100%;
   padding: 12px;

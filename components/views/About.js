@@ -11,7 +11,7 @@ export default () => html`
   <div class="row">
     <div class="column">
       <div class="card">
-        <img src="${jordan} alt="Jordan" />
+        <img class="headshot" src="${jordan} alt="Jordan" />
         <p>some text that describes me</p>
         <p>email address</p>
         <p><span id="contactButton"></span></p>

@@ -1,4 +1,5 @@
 * {
+  font-size: 25px;
 }
 
 body {
@@ -16,10 +17,29 @@ body {
 .flexbox-container {
   background-color: #FCBA04;
 }
-.headshot {
+
+/* Home Page */
+
+/* Contact Page */
+
+/* Favorites Page */
+
+/* Spinner Page */
+
+/* About Page */
+
+.about-flexbox-container {
   display: flex;
-  height: auto;
+  justify-content: space-between;
+}
+
+#headshot {
+  height: 600px;
   width: auto;
+}
+.aboutJordan {
+  padding: 10px;
+  background-color:;
 }
 
 header {
@@ -31,16 +51,18 @@ header {
   justify-content: center;
 }
 
+/* Nav Bar */
+.menu {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: row;
+  }
 @media (max-width: 549px){
   .hidden--mobile {
     display: none !important;
   }
 
-  nav {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
+
 /* Style inputs */
 
 

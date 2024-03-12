@@ -7,9 +7,9 @@ export default () => html`
     <p>We love food, and want to share our favorites with everyone!</p>
   </div>
 
-  <h2>The Team</h2>
   <div class="about-flexbox-container">
     <div class="flexbox-item flexbox-item-photo">
+      <h2>The Team</h2>
       <img id="headshot" src="${jordan} alt="Jordan">
     </div>
     <div class="flexbox-item flexbox-item-about-text">

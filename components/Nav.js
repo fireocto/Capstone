@@ -3,7 +3,7 @@ import html from "html-literal";
 export default links => html`
   <nav class="menu">
     <i class="fas fa-bars"></i>
-    <ul class="hidden--mobile nav-links">
+    <ul id="primary-navigation" class="hidden--mobile nav-links flex">
       ${links
         .map(
           link => html`
@@ -14,7 +14,7 @@ export default links => html`
             </li>
           `
         )
-        .join("")};
+        .join("")}
     </ul>
   </nav>
 `;

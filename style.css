@@ -1,18 +1,11 @@
 * {
-  font-size: 25px;
+
 }
 
 body {
-  display: flex;
   background-color: #C75146;
-  border: 20px solid;
-  border-color: #131200;
-  padding: 20px;
 }
-#jumbotron {
-  display: flex;
-  justify-content: center;
-}
+
 
 .flexbox-container {
   background-color: #FCBA04;
@@ -26,7 +19,14 @@ body {
 
 /* Spinner Page */
 
+
+
 /* About Page */
+
+.about-section {
+  position: ;
+}
+
 
 .about-flexbox-container {
   display: flex;
@@ -34,8 +34,9 @@ body {
 }
 
 #headshot {
-  height: 600px;
-  width: auto;
+  float: left;
+  width: 100%;
+  height: auto;
 }
 .aboutJordan {
   padding: 10px;
@@ -43,79 +44,40 @@ body {
 }
 
 header {
-  display: flex;
   background-color: #FCBA04;
   border-radius: 20px;
-  margin-left: 300px;
-  margin-right: 300px;
-  justify-content: center;
+  margin: auto;
+  width: 32ch;
+  padding: 2px;
+  text-align: center;
 }
 
+header h1 {
+  text-align: center;
+}
 /* Nav Bar */
-.menu {
+
+.primary-navigation {
   display: flex;
-  align-items: flex-end;
   flex-direction: row;
+  justify-content: flex-start;
+
+  list-style: none;
+  padding: 0;
+  margin: 0;
   }
-@media (max-width: 549px){
+
+@media (max-width: 35em){
   .hidden--mobile {
+    position: fixed;
+    inset: 0 0 30% 0;
+    align-items: flex-start;
+    flex-direction: column;
     display: none !important;
   }
-
-
-/* Style inputs */
-
-
-input[type=text], select, textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  margin-top: 6px;
-  margin-bottom: 16px;
-  resize: vertical;
 }
 
-input[type=submit] {
-  background-color: #04AA6D;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  cursor: pointer;
-}
 
-input[type=submit]:hover {
-  background-color: #2e18f3;
-}
-
-/* Style the container/contact section */
-.container {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 10px;
-}
-
-/* Create two columns that float next to eachother */
-.column {
-  float: left;
-  width: 50%;
-  margin-top: 6px;
-  padding: 20px;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-  .column, input[type=submit] {
-    width: 100%;
-    margin-top: 0;
-  }
-}
 
 
 

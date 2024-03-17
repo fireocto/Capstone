@@ -62,13 +62,13 @@ app.get("/status", (request, response) => {
   response.send(JSON.stringify({ message: "Service healthy" }));
 });
 
-app.get("/favorites", (request, response) => {
-  response.json({
-    restaurantName: "Nectar",
-    style: "Mexican",
-    toGo: true
-  });
-});
+// app.get("/favorites", (request, response) => {
+//   response.json({
+//     restaurantName: "Nectar",
+//     style: "Mexican",
+//     toGo: true
+//   });
+// });
 
 // Handle the request with HTTP GET method with query parameters and a url parameter
 app.get("/weather/:city", (request, response) => {

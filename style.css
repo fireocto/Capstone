@@ -1,13 +1,9 @@
 * {
-  font-size: 25px;
+
 }
 
 body {
-  display: flex;
   background-color: #C75146;
-  border: 20px solid;
-  border-color: #131200;
-  padding: 20px;
 }
 
 
@@ -22,6 +18,8 @@ body {
 /* Favorites Page */
 
 /* Spinner Page */
+
+
 
 /* About Page */
 
@@ -46,14 +44,17 @@ body {
 }
 
 header {
-  display: flex;
   background-color: #FCBA04;
   border-radius: 20px;
-  margin-left: 300px;
-  margin-right: 300px;
-  justify-content: center;
+  margin: auto;
+  width: 32ch;
+  padding: 2px;
+  text-align: center;
 }
 
+header h1 {
+  text-align: center;
+}
 /* Nav Bar */
 
 .primary-navigation {
@@ -74,6 +75,7 @@ header {
     flex-direction: column;
     display: none !important;
   }
+}
 
 
 

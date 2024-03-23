@@ -27,10 +27,14 @@ function afterRender() {
 router.hooks({
   before: (done, params) => {
     // We need to know what view we are on to know what data to fetch
-    const view =
-      params && params.data && params.data.view
-        ? capitalize(params.data.view)
-        : "Home";
+    // const view =
+    //   params && params.data && params.data.view
+    //     ? capitalize(params.data.view)
+    //     : "Home";
+    let view = "Home";
+    if (params && params.data && params.data.view) {
+      view = capitalize(params.data.view);
+    }
     // Add a switch case statement to handle multiple routes
     switch (view) {
       // Add a case for each view that needs data from an API
@@ -58,7 +62,7 @@ router.hooks({
       case "Pick":
         // New Axios get request utilizing already made environment variable
         axios
-          .get(`${process.env.MONGODB}/yelp/restaurants`)
+          .get(`${process.env.DINNER_SPINNER_API}/yelp/restaurants/nashville`)
           .then(response => {
             // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
             console.log("response", response);

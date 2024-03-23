@@ -3,9 +3,9 @@ import axios from "axios";
 
 const router = Router();
 
-router.get("/restaurants", async (request, response) => {
+router.get("/restaurants/:location", async (request, response) => {
   try {
-    const location = request.query.location || "nashville";
+    const location = request.params.location || "nashville";
 
     axios
       .get(

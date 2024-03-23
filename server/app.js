@@ -113,7 +113,6 @@ app.get("/weather/:city", (request, response) => {
 
 app.use("/favorites", favorites);
 app.use("/yelp", yelp);
-// app.use("/yelp", yelp);
 
 // Tell the Express app to start listening
 // Let the humans know I am running and listening on 4040

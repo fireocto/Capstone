@@ -1,5 +1,5 @@
 export default {
   header: "Dinner Spinner!",
-  view: "Pick",
+  view: "Suggestions",
   restaurants: []
 };

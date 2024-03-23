@@ -55,23 +55,23 @@ router.hooks({
             done();
           });
         break;
-      // case "Pizza":
-      //   // New Axios get request utilizing already made environment variable
-      //   axios
-      //     .get(`${process.env.PIZZA_PLACE_API_URL}/pizzas`)
-      //     .then(response => {
-      //       // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
-      //       console.log("response", response);
+      case "Pick":
+        // New Axios get request utilizing already made environment variable
+        axios
+          .get(`${process.env.MONGODB}/yelp/restaurants`)
+          .then(response => {
+            // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
+            console.log("response", response);
 
-      //       store.Pizza.pizzas = response.data;
+            store.Pick.restaurants = response.data;
 
-      //       done();
-      //     })
-      //     .catch(error => {
-      //       console.log("It puked", error);
-      //       done();
-      //     });
-      //   break;
+            done();
+          })
+          .catch(error => {
+            console.log("It puked", error);
+            done();
+          });
+        break;
       default:
         done();
     }
@@ -85,16 +85,6 @@ router.hooks({
     render(store[view]);
   }
 });
-
-const options = { method: "GET", headers: { accept: "application/json" } };
-
-fetch(
-  "https://api.yelp.com/v3/businesses/search?sort_by=best_match&limit=20",
-  options
-)
-  .then(response => response.json())
-  .then(response => console.log(response))
-  .catch(err => console.error(err));
 
 router
   .on({

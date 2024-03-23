@@ -3,6 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import favorites from "./routers/favorites.js";
+import yelp from "./routers/yelp.js";
 
 // Load environment variables from .env file
 dotenv.config();
@@ -111,6 +112,8 @@ app.get("/weather/:city", (request, response) => {
 });
 
 app.use("/favorites", favorites);
+app.use("/yelp", yelp);
+// app.use("/yelp", yelp);
 
 // Tell the Express app to start listening
 // Let the humans know I am running and listening on 4040

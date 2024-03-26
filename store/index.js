@@ -4,3 +4,4 @@ export { default as Home } from "./Home";
 export { default as Favorites } from "./Favorites";
 export { default as Pick } from "./Pick";
 export { default as Links } from "./Links";
+export { default as Suggestions } from "./Suggestions";

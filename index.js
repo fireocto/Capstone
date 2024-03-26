@@ -14,23 +14,28 @@ function render(state = store.Home) {
     ${Footer()}
     `;
   router.updatePageLinks();
-  afterRender();
+  afterRender(state);
 }
 
-function afterRender() {
+function afterRender(state) {
   // add menu toggle to bars icon in nav bar
   document.querySelector(".fa-bars").addEventListener("click", () => {
     document.querySelector("nav > ul").classList.toggle("hidden--mobile");
   });
+
 }
 
 router.hooks({
   before: (done, params) => {
     // We need to know what view we are on to know what data to fetch
-    const view =
-      params && params.data && params.data.view
-        ? capitalize(params.data.view)
-        : "Home";
+    // const view =
+    //   params && params.data && params.data.view
+    //     ? capitalize(params.data.view)
+    //     : "Home";
+    let view = "Home";
+    if (params && params.data && params.data.view) {
+      view = capitalize(params.data.view);
+    }
     // Add a switch case statement to handle multiple routes
     switch (view) {
       // Add a case for each view that needs data from an API
@@ -55,23 +60,23 @@ router.hooks({
             done();
           });
         break;
-      // case "Pizza":
-      //   // New Axios get request utilizing already made environment variable
-      //   axios
-      //     .get(`${process.env.PIZZA_PLACE_API_URL}/pizzas`)
-      //     .then(response => {
-      //       // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
-      //       console.log("response", response);
+      case "Pick":
+        // New Axios get request utilizing already made environment variable
+        axios
+          .get(`${process.env.DINNER_SPINNER_API}/yelp/restaurants/nashville`)
+          .then(response => {
+            // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
+            console.log("response", response);
 
-      //       store.Pizza.pizzas = response.data;
+            store.Pick.restaurants = response.data;
 
-      //       done();
-      //     })
-      //     .catch(error => {
-      //       console.log("It puked", error);
-      //       done();
-      //     });
-      //   break;
+            done();
+          })
+          .catch(error => {
+            console.log("It puked", error);
+            done();
+          });
+        break;
       default:
         done();
     }
@@ -85,16 +90,6 @@ router.hooks({
     render(store[view]);
   }
 });
-
-const options = { method: "GET", headers: { accept: "application/json" } };
-
-fetch(
-  "https://api.yelp.com/v3/businesses/search?sort_by=best_match&limit=20",
-  options
-)
-  .then(response => response.json())
-  .then(response => console.log(response))
-  .catch(err => console.error(err));
 
 router
   .on({

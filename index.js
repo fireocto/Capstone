@@ -3,7 +3,6 @@ import * as store from "./store";
 import Navigo from "navigo";
 import { capitalize } from "lodash";
 import axios from "axios";
-import { response } from "express";
 
 const router = new Navigo("/");
 
@@ -15,40 +14,16 @@ function render(state = store.Home) {
     ${Footer()}
     `;
   router.updatePageLinks();
-  afterRender();
+  afterRender(state);
 }
 
-function afterRender() {
+function afterRender(state) {
   // add menu toggle to bars icon in nav bar
   document.querySelector(".fa-bars").addEventListener("click", () => {
     document.querySelector("nav > ul").classList.toggle("hidden--mobile");
-
-    axios
-      .get(`${process.env.DINNER_SPINNER_API}/yelp/restaurants/nashville`)
-      .then(response => {
-        // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
-        console.log("response", response);
-
-        store.Pick.restaurants = response.data;
-      })
-      .catch(error => {
-        console.log("It puked", error);
-      });
   });
+
 }
-
-axios
-  .get(`${process.env.DINNER_SPINNER_API}/yelp/restaurants/nashville`)
-  .then(response => {
-    // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
-    console.log("response", response);
-
-    store.Pick.restaurants = response.data;
-  })
-  .catch(error => {
-    console.log("It puked", error);
-  });
-afterRender();
 
 router.hooks({
   before: (done, params) => {

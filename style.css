@@ -19,7 +19,42 @@ body {
 
 /* Spinner Page */
 
+#pick #restaurants {
+  background-color: rgba(0, 0, 120, .2);
+  border-radius: 0.25em;
+  width: 50%;
+  margin: 1em auto;
+  padding: 0.25em;
+}
 
+#pick h2 {
+  width: 50%;
+  margin: 1em auto;
+}
+
+/* Wheel */
+
+.wheel-wrapper {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+.gui-wrapper {
+  padding: 10px;
+  background-color: #f3f3f3;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+select {
+  padding: 2px;
+}
+
+label {
+  margin-right: 5px;
+}
 
 /* About Page */
 

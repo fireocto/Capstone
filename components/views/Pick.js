@@ -1,8 +1,9 @@
 import html from "html-literal";
+// import { Wheel } from "https://cdn.jsdelivr.net/npm/spin-wheel@4.3.1/dist/spin-wheel-esm.js";
 
 export default state => html`
-  <h2>Pick!</h2>
   <section id="pick">
+    <h2>Pick!</h2>
     <div id="restaurants">
       ${state.restaurants
         .map(
@@ -19,7 +20,31 @@ export default state => html`
         .join("")}
     </div>
   </section>
+
+  <div class="gui-wrapper">
+    <p>Click-drag (or flick) to spin the wheel.</p>
+  </div>
+
+  <div class="wheel-wrapper"></div>
 `;
+// window.onload = () => {
+//   const props = {
+//     items: [
+//       {
+//         label: "one"
+//       },
+//       {
+//         label: "two"
+//       },
+//       {
+//         label: "three"
+//       }
+//     ]
+//   };
+
+// const container = document.querySelector(".wheel-wrapper");
+
+// window.wheel = new Wheel(container, props);
 
 //   <!-- <section id="restaurantType">
 //     <div class="filter">

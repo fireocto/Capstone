@@ -22,8 +22,29 @@ function afterRender(state) {
   document.querySelector(".fa-bars").addEventListener("click", () => {
     document.querySelector("nav > ul").classList.toggle("hidden--mobile");
   });
-}
 
+  if (state.view === "Favorites") {
+    document
+      .getElementById("search-button")
+      .addEventListener("click", event => {
+        event.preventDefault();
+
+        const column = document.getElementById("favoritesMenu").value;
+        // const filter = document.getElementById("filter").value;
+
+        axios
+          .get(`${process.env.DINNER_SPINNER_API}/favorites?style=${column}`)
+          .then(response => {
+            console.log(response.data);
+            store.Favorites.favorites = response.data;
+            router.navigate("/favorites");
+          })
+          .catch(error => {
+            console.log("It puked", error);
+          });
+      });
+  }
+}
 router.hooks({
   before: (done, params) => {
     // We need to know what view we are on to know what data to fetch

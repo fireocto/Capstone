@@ -21,30 +21,16 @@ export default state => html`
     </div>
   </section>
 
-  <div class="gui-wrapper">
+  <div id="gui-wrapper">
     <p>Click-drag (or flick) to spin the wheel.</p>
   </div>
 
-  <div class="wheel-wrapper"></div>
+  <div id="wheel-wrapper"></div>
+
+  <div id="spin-it">
+    Spin It!
+  </div>
 `;
-// window.onload = () => {
-//   const props = {
-//     items: [
-//       {
-//         label: "one"
-//       },
-//       {
-//         label: "two"
-//       },
-//       {
-//         label: "three"
-//       }
-//     ]
-//   };
-
-// const container = document.querySelector(".wheel-wrapper");
-
-// window.wheel = new Wheel(container, props);
 
 //   <!-- <section id="restaurantType">
 //     <div class="filter">

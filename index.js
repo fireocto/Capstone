@@ -97,7 +97,26 @@ function afterRender(state) {
       wheel.spin(spinRate);
     });
   }
+
+  // document
+  // .querySelector("#pickMenu")
+  // .addEventListener("click", event => {
+  //   event.preventDefault();
+
+  //   axios
+  //       .get(`${process.env.DINNER_SPINNER_API}/favorites?style=${column}`)
+  //       .then(response => {
+  //         console.log(response.data);
+  //         store.Favorites.favorites = response.data;
+  //         router.navigate("/favorites");
+  //       })
+  //       .catch(error => {
+  //         console.log("It puked", error);
+  //       });
+
+  // });
 }
+
 router.hooks({
   before: (done, params) => {
     // We need to know what view we are on to know what data to fetch

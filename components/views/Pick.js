@@ -4,6 +4,12 @@ import html from "html-literal";
 export default state => html`
   <section id="pick">
     <h2>Pick!</h2>
+    <section id="pickMenu">
+    <div class="pickMenu">
+      <input type="text" name="style" placeholder="Style of Food">
+      <input type="text" name="location" placeholder="Your Location">
+      <input type="number" name="radius" placeholder="How Far Away">
+      <button id="search-button">Search</button>
     <div id="restaurants">
       ${state.restaurants
         .map(

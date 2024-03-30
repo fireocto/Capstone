@@ -3,6 +3,8 @@ import * as store from "./store";
 import Navigo from "navigo";
 import { capitalize } from "lodash";
 import axios from "axios";
+import { Wheel } from "spin-wheel/dist/spin-wheel-esm";
+import overlay from "./assets/img/overlay.svg";
 
 const router = new Navigo("/");
 
@@ -22,6 +24,97 @@ function afterRender(state) {
   document.querySelector(".fa-bars").addEventListener("click", () => {
     document.querySelector("nav > ul").classList.toggle("hidden--mobile");
   });
+
+  if (state.view === "Favorites") {
+    document
+      .getElementById("search-button")
+      .addEventListener("click", event => {
+        event.preventDefault();
+
+        const column = document.getElementById("favoritesMenu").value;
+        // const filter = document.getElementById("filter").value;
+
+        axios
+          .get(`${process.env.DINNER_SPINNER_API}/favorites?style=${column}`)
+          .then(response => {
+            console.log(response.data);
+            store.Favorites.favorites = response.data;
+            router.navigate("/favorites");
+          })
+          .catch(error => {
+            console.log("It puked", error);
+          });
+      });
+  }
+  if (state.view === "Pick") {
+    const props = {
+      isInteractive: false,
+      pointerAngle: 90,
+      overlayImage: overlay,
+      itemBackgroundColors: [
+        "#33658A",
+        "#86BBD8",
+        "#758E4F",
+        "#F6AE2D",
+        "#F26419"
+      ],
+      items: []
+    };
+
+    state.restaurants.forEach(restaurant => {
+      props.items.push({
+        label: restaurant.name
+      });
+    });
+
+    const container = document.querySelector("#wheel-wrapper");
+
+    const wheel = new Wheel(container, props);
+
+    wheel.onRest = event => {
+      console.log(event);
+
+      console.log(state.restaurants[event.currentIndex]);
+    };
+
+    document
+      .querySelector("#wheel-wrapper canvas")
+      .addEventListener("click", event => {
+        event.preventDefault();
+
+        // Generate a random number between 250 and 400
+        // Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled);
+        const spinRate = Math.floor(Math.random() * 151 + 200);
+        console.log("matsinet-index.js:61-spinRate:", spinRate);
+        wheel.spin(spinRate);
+      });
+
+    document.getElementById("spin-it").addEventListener("click", event => {
+      event.preventDefault();
+
+      const spinRate = Math.floor(Math.random() * 151 + 200);
+      console.log("matsinet-index.js:61-spinRate:", spinRate);
+      wheel.spin(spinRate);
+    });
+  }
+
+  // document
+  // .querySelector("#pickMenu")
+  // .addEventListener("click", event => {
+  //   event.preventDefault();
+
+  //   axios
+  //       .get(`${process.env.DINNER_SPINNER_API}/favorites?style=${column}`)
+  //       .then(response => {
+  //         console.log(response.data);
+  //         store.Favorites.favorites = response.data;
+  //         router.navigate("/favorites");
+  //       })
+  //       .catch(error => {
+  //         console.log("It puked", error);
+  //       });
+
+  // });
 }
 
 router.hooks({

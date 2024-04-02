@@ -75,6 +75,15 @@ function afterRender(state) {
       console.log(event);
 
       console.log(state.restaurants[event.currentIndex]);
+      store.Pick.selection = [];
+      store.Pick.selection.push(state.restaurants[event.currentIndex]);
+      console.log(store.Pick.selection);
+      router.navigate("/pick");
+      alert(
+        state.restaurants[event.currentIndex].name +
+          "\n" +
+          state.restaurants[event.currentIndex].location.display_address
+      );
     };
 
     document
@@ -96,6 +105,32 @@ function afterRender(state) {
       console.log("matsinet-index.js:61-spinRate:", spinRate);
       wheel.spin(spinRate);
     });
+
+    document.getElementById("#pickMenu").addEventListener("submit", event => {
+      event.preventDefault();
+
+      const inputList = event.target.elements;
+      console.log("Input Element List", inputList);
+
+      const requestData = {
+        style: inputList.style.value,
+        location: inputList.location.value,
+        radius: inputList.radius.value
+      };
+      console.log(requestData);
+    });
+
+    // axios
+    //   .get(`${process.env.DINNER_SPINNER_API}/yelp/restaurants`, requestData)
+    //   .then(response => {
+    //     console.log(response.data);
+    //     // store.Favorites.favorites = response.data;
+    //     router.navigate("/picks");
+    //   })
+    //   .catch(error => {
+    //     console.log("It puked", error);
+    //   });
+    // });
   }
 
   // document
@@ -151,11 +186,25 @@ router.hooks({
             };
             done();
           });
+        // axios
+        //   .get(`${process.env.DINNER_SPINNER_API}/yelp/restaurants/nashville`)
+        //   .then(response => {
+        //     // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
+        //     console.log("response", response);
+
+        //     store.Pick.restaurants = response.data;
+
+        //     done();
+        //   })
+        //   .catch(error => {
+        //     console.log("It puked", error);
+        //     done();
+        //   });
         break;
       case "Pick":
         // New Axios get request utilizing already made environment variable
         axios
-          .get(`${process.env.DINNER_SPINNER_API}/yelp/restaurants/nashville`)
+          .get(`${process.env.DINNER_SPINNER_API}/yelp/restaurants`)
           .then(response => {
             // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
             console.log("response", response);
@@ -169,6 +218,7 @@ router.hooks({
             done();
           });
         break;
+
       default:
         done();
     }

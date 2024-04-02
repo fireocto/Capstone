@@ -1,15 +1,16 @@
 import html from "html-literal";
-// import { Wheel } from "https://cdn.jsdelivr.net/npm/spin-wheel@4.3.1/dist/spin-wheel-esm.js";
 
 export default state => html`
   <section id="pick">
     <h2>Pick!</h2>
     <section id="pickMenu">
     <div class="pickMenu">
-      <input type="text" name="style" placeholder="Style of Food">
-      <input type="text" name="location" placeholder="Your Location">
-      <input type="number" name="radius" placeholder="How Far Away">
-      <button id="search-button">Search</button>
+      <form action="" method="post">
+      <input type="text" name="style"  placeholder="Style of Food" required>
+      <input type="text" name="location" placeholder="City" required>
+      <input type="number" name="radius" placeholder="How Far Away (miles)" required>
+      <button type="submit" id="search-button">Search</button>
+      </form>
     <div id="restaurants">
       ${state.restaurants
         .map(
@@ -27,10 +28,19 @@ export default state => html`
     </div>
   </section>
 
-  <div id="gui-wrapper">
+  <!-- <div id="gui-wrapper">
     <p>Click-drag (or flick) to spin the wheel.</p>
-  </div>
-
+  </div> -->
+<!-- put pop up here -->
+info goes here
+${state.selection
+  .map(
+    item => html`
+      <div>${item.name} ${item.location.display_address}</div>
+      1
+    `
+  )
+  .join("")}
   <div id="wheel-wrapper"></div>
 
   <div id="spin-it">

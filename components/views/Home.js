@@ -6,6 +6,8 @@ export default state => html`
     <a href="index.html">"Take It For A Spin!" "Button"</a>
   </section>
 
+  <div id="wheel-wrapper"></div>
+
   <h3>
     The weather in ${state.weather.city}: ${state.weather.description}.
     Temperature is ${state.weather.temp}F, and it feels like

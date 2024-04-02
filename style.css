@@ -19,10 +19,17 @@ body {
 
 /* Spinner Page */
 
+#pick #pickMenu .pickMenu {
+  border-radius: 0.25em;
+  width: 50%;
+  margin: 1em auto;
+  padding: 0.25em;
+}
+
 #pick #restaurants {
   background-color: rgba(0, 0, 120, .2);
   border-radius: 0.25em;
-  width: 50%;
+  width: 75%;
   margin: 1em auto;
   padding: 0.25em;
 }
@@ -54,6 +61,14 @@ select {
 
 label {
   margin-right: 5px;
+}
+
+@media (max-width: 750px){
+  #wheel-wrapper {
+    width: 100vw;
+    position: absolute;
+    left: -50%;
+  }
 }
 
 /* About Page */

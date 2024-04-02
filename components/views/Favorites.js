@@ -16,10 +16,13 @@ export default state => html`
       <button id="search-button">Search</button>
     </div>
   </section>
+  <div id="favorites"
   ${state.favorites
     .map(favorites => {
       return html`
-        ${favorites.value}
+        <div>
+          ${favorites.value}
+        </div>
       `;
     })
     .join("")}

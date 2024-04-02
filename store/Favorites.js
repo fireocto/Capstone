@@ -1,4 +1,5 @@
 export default {
   header: "Our Favorite Spots!",
-  view: "Favorites"
+  view: "Favorites",
+  favorites: []
 };

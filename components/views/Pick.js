@@ -11,7 +11,7 @@ export default state => html`
       <input type="number" name="radius" placeholder="How Far Away (miles)" required>
       <button type="submit" id="search-button">Search</button>
       </form>
-    <div id="restaurants">
+    <!-- <div id="restaurants">
       ${state.restaurants
         .map(
           restaurant =>
@@ -25,7 +25,7 @@ export default state => html`
             `
         )
         .join("")}
-    </div>
+    </div> -->
   </section>
 
   <!-- <div id="gui-wrapper">
@@ -40,6 +40,7 @@ ${state.selection
     `
   )
   .join("")}
+
   <div id="wheel-wrapper"></div>
 
   <div id="spin-it">

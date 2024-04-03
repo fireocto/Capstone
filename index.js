@@ -213,7 +213,7 @@ router.hooks({
       case "Pick":
         // New Axios get request utilizing already made environment variable
         axios
-          .get(`${process.env.DINNER_SPINNER_API}/yelp/restaurants`)
+          .get(`${process.env.DINNER_SPINNER_API}/yelp/restaurants/nashville`)
           .then(response => {
             // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
             console.log("response", response);

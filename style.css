@@ -63,18 +63,17 @@ label {
   margin-right: 5px;
 }
 
-/* @media (max-width: 750px){
+@media (max-width: 750px){
   #wheel-wrapper {
     width: 100vw;
     position: absolute;
-    left: -50%;
   }
-} */
+}
 
 /* About Page */
 
 .about-section {
-  position: ;
+  position:
 }
 
 

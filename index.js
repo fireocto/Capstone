@@ -68,17 +68,24 @@ function afterRender(state) {
     });
 
     const container = document.querySelector("#wheel-wrapper");
-
+    container.addEventListener("click", () => {
+      store.Pick.selection = [];
+      console.log("I was clicked");
+    });
     const wheel = new Wheel(container, props);
 
     wheel.onRest = event => {
       console.log(event);
+      // popUpSelected( {
+      //   popUp = document.getElementById()
+      // })
 
       console.log(state.restaurants[event.currentIndex]);
       store.Pick.selection = [];
       store.Pick.selection.push(state.restaurants[event.currentIndex]);
       console.log(store.Pick.selection);
       router.navigate("/pick");
+      // document.querySelector for toggle secret message
       alert(
         state.restaurants[event.currentIndex].name +
           "\n" +
@@ -106,31 +113,33 @@ function afterRender(state) {
       wheel.spin(spinRate);
     });
 
-    document.getElementById("#pickMenu").addEventListener("submit", event => {
+    document.getElementById("pickMenu").addEventListener("submit", event => {
       event.preventDefault();
 
       const inputList = event.target.elements;
       console.log("Input Element List", inputList);
 
-      const requestData = {
-        style: inputList.style.value,
-        location: inputList.location.value,
-        radius: inputList.radius.value
-      };
-      console.log(requestData);
-    });
+      const location = inputList.location.value.toLowerCase();
+      const radius = inputList.radius.value * 1609;
+      const categories = inputList.categories.value.toLowerCase();
 
-    // axios
-    //   .get(`${process.env.DINNER_SPINNER_API}/yelp/restaurants`, requestData)
-    //   .then(response => {
-    //     console.log(response.data);
-    //     // store.Favorites.favorites = response.data;
-    //     router.navigate("/picks");
-    //   })
-    //   .catch(error => {
-    //     console.log("It puked", error);
-    //   });
-    // });
+      console.log(`location is ${location}`);
+      console.log(`radius is ${radius}`);
+      console.log(`category is ${categories}`);
+
+      axios
+        .get(
+          `${process.env.DINNER_SPINNER_API}/yelp/restaurants/${location}/${radius}/${categories}`
+        )
+        .then(response => {
+          console.log(response.data);
+          store.Pick.restaurants = response.data;
+          router.navigate("/pick");
+        })
+        .catch(error => {
+          console.log("It puked", error);
+        });
+    });
   }
 
   // document

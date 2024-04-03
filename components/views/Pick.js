@@ -6,7 +6,7 @@ export default state => html`
     <section id="pickMenu">
     <div class="pickMenu">
       <form action="" method="post">
-      <input type="text" name="style"  placeholder="Style of Food" required>
+      <input type="text" name="categories"  placeholder="Style of Food" required>
       <input type="text" name="location" placeholder="City" required>
       <input type="number" name="radius" placeholder="How Far Away (miles)" required>
       <button type="submit" id="search-button">Search</button>
@@ -32,12 +32,11 @@ export default state => html`
     <p>Click-drag (or flick) to spin the wheel.</p>
   </div> -->
 <!-- put pop up here -->
-info goes here
+
 ${state.selection
   .map(
     item => html`
       <div>${item.name} ${item.location.display_address}</div>
-      1
     `
   )
   .join("")}

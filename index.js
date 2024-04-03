@@ -68,13 +68,29 @@ function afterRender(state) {
     });
 
     const container = document.querySelector("#wheel-wrapper");
-
+    container.addEventListener("click", () => {
+      store.Pick.selection = [];
+      console.log("I was clicked");
+    });
     const wheel = new Wheel(container, props);
 
     wheel.onRest = event => {
       console.log(event);
+      // popUpSelected( {
+      //   popUp = document.getElementById()
+      // })
 
       console.log(state.restaurants[event.currentIndex]);
+      store.Pick.selection = [];
+      store.Pick.selection.push(state.restaurants[event.currentIndex]);
+      console.log(store.Pick.selection);
+      router.navigate("/pick");
+      // document.querySelector for toggle secret message
+      alert(
+        state.restaurants[event.currentIndex].name +
+          "\n" +
+          state.restaurants[event.currentIndex].location.display_address
+      );
     };
 
     document
@@ -95,6 +111,34 @@ function afterRender(state) {
       const spinRate = Math.floor(Math.random() * 151 + 200);
       console.log("matsinet-index.js:61-spinRate:", spinRate);
       wheel.spin(spinRate);
+    });
+
+    document.getElementById("pickMenu").addEventListener("submit", event => {
+      event.preventDefault();
+
+      const inputList = event.target.elements;
+      console.log("Input Element List", inputList);
+
+      const location = inputList.location.value.toLowerCase();
+      const radius = inputList.radius.value * 1609;
+      const categories = inputList.categories.value.toLowerCase();
+
+      console.log(`location is ${location}`);
+      console.log(`radius is ${radius}`);
+      console.log(`category is ${categories}`);
+
+      axios
+        .get(
+          `${process.env.DINNER_SPINNER_API}/yelp/restaurants/${location}/${radius}/${categories}`
+        )
+        .then(response => {
+          console.log(response.data);
+          store.Pick.restaurants = response.data;
+          router.navigate("/pick");
+        })
+        .catch(error => {
+          console.log("It puked", error);
+        });
     });
   }
 
@@ -151,11 +195,25 @@ router.hooks({
             };
             done();
           });
+        // axios
+        //   .get(`${process.env.DINNER_SPINNER_API}/yelp/restaurants/nashville`)
+        //   .then(response => {
+        //     // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
+        //     console.log("response", response);
+
+        //     store.Pick.restaurants = response.data;
+
+        //     done();
+        //   })
+        //   .catch(error => {
+        //     console.log("It puked", error);
+        //     done();
+        //   });
         break;
       case "Pick":
         // New Axios get request utilizing already made environment variable
         axios
-          .get(`${process.env.DINNER_SPINNER_API}/yelp/restaurants/nashville`)
+          .get(`${process.env.DINNER_SPINNER_API}/yelp/restaurants`)
           .then(response => {
             // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
             console.log("response", response);
@@ -169,6 +227,7 @@ router.hooks({
             done();
           });
         break;
+
       default:
         done();
     }

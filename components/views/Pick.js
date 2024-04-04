@@ -21,8 +21,8 @@ export default state => html`
           />
           <button type="submit" id="search-button">Search</button>
         </form>
-        <!-- <!-- <div id="restaurants"> -->
-        ${state.restaurants
+        <!-- <div id="restaurants"> -->
+        <!-- ${state.restaurants
           .map(
             restaurant =>
               html`
@@ -34,9 +34,8 @@ export default state => html`
                 </div>
               `
           )
-          .join("")}
+          .join("")} -->
       </div>
-      -->
     </section>
 
     <!-- <div id="gui-wrapper">

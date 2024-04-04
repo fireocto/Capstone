@@ -9,7 +9,7 @@ export default state => html`
         <!-- <option value="bar">Bar</option> -->
         <option value="Mexican">Mexican</option>
         <option value="Pizza">Pizza</option>
-        <option value="Sushi">Sushi</option>
+        <!-- <option value="Sushi-Bar">Sushi</option> -->
         <option value="Sandwiches">Sandwiches</option>
         <option value="Thai">Thai</option>
       </select>

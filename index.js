@@ -40,7 +40,7 @@ function afterRender(state) {
       items: []
     };
 
-    state.favorites.forEach(favorites => {
+    store.Favorites.favorites.forEach(favorites => {
       props.items.push({
         label: favorites.name
       });
@@ -56,16 +56,16 @@ function afterRender(state) {
     wheel.onRest = event => {
       console.log(event);
 
-      console.log(state.restaurants[event.currentIndex]);
-      store.Favorites.favorites = [];
-      store.Favorites.favorites.push(state.favorites[event.currentIndex]);
-      console.log(store.Favorites.favorites);
+      // console.log(state.restaurants[event.currentIndex]);
+      store.Favorites.fav = [];
+      store.Favorites.fav.push(store.Favorites.favorites[event.currentIndex]);
+      console.log(store.Favorites.fav[event.currentIndex]);
       router.navigate("/");
       // document.querySelector for toggle secret message
       alert(
-        state.restaurants[event.currentIndex].name +
+        store.Favorites.favorites[event.currentIndex].name +
           "\n" +
-          state.restaurants[event.currentIndex].location.display_address
+          store.Favorites.favorites[event.currentIndex].location
       );
     };
 
@@ -141,9 +141,6 @@ function afterRender(state) {
 
     wheel.onRest = event => {
       console.log(event);
-      // popUpSelected( {
-      //   popUp = document.getElementById()
-      // })
 
       console.log(state.restaurants[event.currentIndex]);
       store.Pick.selection = [];
@@ -265,6 +262,7 @@ router.hooks({
           .then(response => {
             console.log(response.data);
             store.Favorites.favorites = response.data;
+            console.log(store.Favorites.favorites);
             router.navigate("/");
 
             done();

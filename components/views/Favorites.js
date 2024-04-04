@@ -6,12 +6,12 @@ export default state => html`
     <div class="filter">
       <select name="favoritesMenu" id="favoritesMenu">
         <option value="">What do you feel like?</option>
-        <option value="bar">Bar</option>
+        <!-- <option value="bar">Bar</option> -->
         <option value="Mexican">Mexican</option>
-        <option value="pizza">Pizza</option>
-        <option value="american">American</option>
-        <option value="sandwiches">Sandwiches</option>
-        <option value="thai">Thai</option>
+        <option value="Pizza">Pizza</option>
+        <option value="Sushi">Sushi</option>
+        <option value="Sandwiches">Sandwiches</option>
+        <option value="Thai">Thai</option>
       </select>
       <button id="search-button">Search</button>
     </div>
@@ -21,7 +21,10 @@ export default state => html`
     .map(favorites => {
       return html`
         <div>
-          ${favorites.value}
+          ${favorites.name}
+        </div>
+        <div>
+          ${favorites.location}
         </div>
       `;
     })

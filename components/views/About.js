@@ -10,7 +10,7 @@ export default () => html`
   <div class="about-flexbox-container">
     <div class="flexbox-item flexbox-item-photo">
       <h2>The Team</h2>
-      <img id="headshot" src="${jordan} alt="Jordan">
+      <img id="headshot" src="${jordan}" alt="Jordan" />
     </div>
     <div class="flexbox-item flexbox-item-about-text">
       <p class="aboutJordan">

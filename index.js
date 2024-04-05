@@ -48,7 +48,7 @@ function afterRender(state) {
 
     const container = document.querySelector("#wheel-wrapper");
     container.addEventListener("click", () => {
-      store.Favorites.favorites = [];
+      store.Favorites.fav = [];
       console.log("I was clicked");
     });
     const wheel = new Wheel(container, props);
@@ -57,9 +57,8 @@ function afterRender(state) {
       console.log(event);
 
       // console.log(state.restaurants[event.currentIndex]);
-      store.Favorites.fav = [];
       store.Favorites.fav.push(store.Favorites.favorites[event.currentIndex]);
-      console.log(store.Favorites.fav[event.currentIndex]);
+      console.log(store.Favorites.favorites[event.currentIndex]);
       router.navigate("/");
       // document.querySelector for toggle secret message
       alert(
@@ -88,6 +87,28 @@ function afterRender(state) {
       console.log("matsinet-index.js:61-spinRate:", spinRate);
       wheel.spin(spinRate);
     });
+  }
+
+  if (state.view === "Contact") {
+    document
+      .getElementById("search-button")
+      .addEventListener("click", event => {
+        event.preventDefault();
+
+        const input = document.getElementById("favoritesMenu").value;
+        // const filter = document.getElementById("filter").value;
+
+        axios
+          .get(`${process.env.DINNER_SPINNER_API}/favorites?category=${input}`)
+          .then(response => {
+            console.log(response.data);
+            store.Favorites.favorites = response.data;
+            router.navigate("/favorites");
+          })
+          .catch(error => {
+            console.log("It puked", error);
+          });
+      });
   }
 
   if (state.view === "Favorites") {
@@ -224,7 +245,7 @@ function afterRender(state) {
 }
 
 router.hooks({
-  before: (done, params) => {
+  before: async (done, params) => {
     // We need to know what view we are on to know what data to fetch
     // const view =
     //   params && params.data && params.data.view
@@ -238,39 +259,33 @@ router.hooks({
     switch (view) {
       // Add a case for each view that needs data from an API
       case "Home":
-        axios
-          .get(
+        try {
+          const weatherResponse = await axios.get(
             `https://api.openweathermap.org/data/2.5/weather?APPID=${process.env.OPEN_WEATHER_MAP_API_KEY}&q=nashville`
-          )
-          .then(response => {
-            console.log(response);
-            // Convert Kelvin to Fahrenheit since OpenWeatherMap does provide otherwise
-            const kelvinToFahrenheit = kelvinTemp =>
-              Math.round((kelvinTemp - 273.15) * (9 / 5) + 32);
+          );
 
-            // Create an object to be stored in the Home state from the response
-            store.Home.weather = {
-              city: response.data.name,
-              temp: kelvinToFahrenheit(response.data.main.temp),
-              feelsLike: kelvinToFahrenheit(response.data.main.feels_like),
-              description: response.data.weather[0].main
-            };
-            done();
-          });
-        axios
-          .get(`${process.env.DINNER_SPINNER_API}/favorites`)
-          .then(response => {
-            console.log(response.data);
-            store.Favorites.favorites = response.data;
-            console.log(store.Favorites.favorites);
-            router.navigate("/");
+          const favoritesResponse = await axios.get(
+            `${process.env.DINNER_SPINNER_API}/favorites`
+          );
 
-            done();
-          })
-          .catch(error => {
-            console.log("It puked", error);
-            done();
-          });
+          store.Favorites.favorites = favoritesResponse.data;
+
+          // Convert Kelvin to Fahrenheit since OpenWeatherMap does provide otherwise
+          const kelvinToFahrenheit = kelvinTemp =>
+            Math.round((kelvinTemp - 273.15) * (9 / 5) + 32);
+
+          // Create an object to be stored in the Home state from the response
+          store.Home.weather = {
+            city: weatherResponse.data.name,
+            temp: kelvinToFahrenheit(weatherResponse.data.main.temp),
+            feelsLike: kelvinToFahrenheit(weatherResponse.data.main.feels_like),
+            description: weatherResponse.data.weather[0].main
+          };
+          router.navigate("/");
+          done();
+        } catch (error) {
+          console.log(error);
+        }
 
         break;
       case "Pick":

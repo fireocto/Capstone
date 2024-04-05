@@ -25,17 +25,82 @@ function afterRender(state) {
     document.querySelector("nav > ul").classList.toggle("hidden--mobile");
   });
 
+  if (state.view === "Home") {
+    const props = {
+      isInteractive: false,
+      pointerAngle: 90,
+      overlayImage: overlay,
+      itemBackgroundColors: [
+        "#33658A",
+        "#86BBD8",
+        "#758E4F",
+        "#F6AE2D",
+        "#F26419"
+      ],
+      items: []
+    };
+
+    store.Favorites.favorites.forEach(favorites => {
+      props.items.push({
+        label: favorites.name
+      });
+    });
+
+    const container = document.querySelector("#wheel-wrapper");
+    container.addEventListener("click", () => {
+      store.Favorites.favorites = [];
+      console.log("I was clicked");
+    });
+    const wheel = new Wheel(container, props);
+
+    wheel.onRest = event => {
+      console.log(event);
+
+      // console.log(state.restaurants[event.currentIndex]);
+      store.Favorites.fav = [];
+      store.Favorites.fav.push(store.Favorites.favorites[event.currentIndex]);
+      console.log(store.Favorites.fav[event.currentIndex]);
+      router.navigate("/");
+      // document.querySelector for toggle secret message
+      alert(
+        store.Favorites.favorites[event.currentIndex].name +
+          "\n" +
+          store.Favorites.favorites[event.currentIndex].location
+      );
+    };
+
+    document
+      .querySelector("#wheel-wrapper canvas")
+      .addEventListener("click", event => {
+        event.preventDefault();
+
+        // Generate a random number between 250 and 400
+        // Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled);
+        const spinRate = Math.floor(Math.random() * 151 + 200);
+        console.log("matsinet-index.js:61-spinRate:", spinRate);
+        wheel.spin(spinRate);
+      });
+
+    document.getElementById("spin-it").addEventListener("click", event => {
+      event.preventDefault();
+
+      const spinRate = Math.floor(Math.random() * 151 + 200);
+      console.log("matsinet-index.js:61-spinRate:", spinRate);
+      wheel.spin(spinRate);
+    });
+  }
+
   if (state.view === "Favorites") {
     document
       .getElementById("search-button")
       .addEventListener("click", event => {
         event.preventDefault();
 
-        const column = document.getElementById("favoritesMenu").value;
+        const input = document.getElementById("favoritesMenu").value;
         // const filter = document.getElementById("filter").value;
 
         axios
-          .get(`${process.env.DINNER_SPINNER_API}/favorites?style=${column}`)
+          .get(`${process.env.DINNER_SPINNER_API}/favorites?category=${input}`)
           .then(response => {
             console.log(response.data);
             store.Favorites.favorites = response.data;
@@ -76,9 +141,6 @@ function afterRender(state) {
 
     wheel.onRest = event => {
       console.log(event);
-      // popUpSelected( {
-      //   popUp = document.getElementById()
-      // })
 
       console.log(state.restaurants[event.currentIndex]);
       store.Pick.selection = [];
@@ -195,25 +257,26 @@ router.hooks({
             };
             done();
           });
-        // axios
-        //   .get(`${process.env.DINNER_SPINNER_API}/yelp/restaurants/nashville`)
-        //   .then(response => {
-        //     // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
-        //     console.log("response", response);
+        axios
+          .get(`${process.env.DINNER_SPINNER_API}/favorites`)
+          .then(response => {
+            console.log(response.data);
+            store.Favorites.favorites = response.data;
+            console.log(store.Favorites.favorites);
+            router.navigate("/");
 
-        //     store.Pick.restaurants = response.data;
+            done();
+          })
+          .catch(error => {
+            console.log("It puked", error);
+            done();
+          });
 
-        //     done();
-        //   })
-        //   .catch(error => {
-        //     console.log("It puked", error);
-        //     done();
-        //   });
         break;
       case "Pick":
         // New Axios get request utilizing already made environment variable
         axios
-          .get(`${process.env.DINNER_SPINNER_API}/yelp/restaurants`)
+          .get(`${process.env.DINNER_SPINNER_API}/yelp/restaurants/nashville`)
           .then(response => {
             // We need to store the response to the state, in the next step but in the meantime let's see what it looks like so that we know what to store from the response.
             console.log("response", response);

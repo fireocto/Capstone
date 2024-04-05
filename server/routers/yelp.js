@@ -3,31 +3,31 @@ import axios from "axios";
 
 const router = Router();
 
-// router.get("/restaurants/:location", async (request, response) => {
-//   try {
-//     const location = request.params.location;
-//     axios
-//       .get(
-//         `https://api.yelp.com/v3/businesses/search?sort_by=best_match&location=${location}&radius=8046&term=restaurants&open_now=true`,
-//         {
-//           headers: {
-//             Authorization: `Bearer ${process.env.YELP_API_KEY}`
-//           }
-//         }
-//       )
-//       .then(yelpResponse => {
-//         response.json(yelpResponse.data.businesses);
-//       })
-//       .catch(error => {
-//         console.log("It puked", error);
-//         response.status(500).json(error);
-//       });
-//   } catch (error) {
-//     console.log(error);
+router.get("/restaurants/:location", async (request, response) => {
+  try {
+    const location = request.params.location;
+    axios
+      .get(
+        `https://api.yelp.com/v3/businesses/search?sort_by=best_match&location=${location}&term=restaurants&open_now=true&attributes=hot_and_new`,
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.YELP_API_KEY}`
+          }
+        }
+      )
+      .then(yelpResponse => {
+        response.json(yelpResponse.data.businesses);
+      })
+      .catch(error => {
+        console.log("It puked", error);
+        response.status(500).json(error);
+      });
+  } catch (error) {
+    console.log(error);
 
-//     return response.status(500).json(error.errors);
-//   }
-// });
+    return response.status(500).json(error.errors);
+  }
+});
 
 router.get(
   "/restaurants/:location/:radius/:categories",

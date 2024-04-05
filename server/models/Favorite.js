@@ -1,17 +1,18 @@
 import mongoose from "mongoose";
 
 const favoriteSchema = new mongoose.Schema({
-  restaurantName: {
+  name: {
     type: String,
-    validate: /^[A-Za-z0-9 ]*$/
+    validate: /^[A-Za-z0-9 '&]*$/
   },
-  style: {
-    type: String,
-    required: true
+  category: {
+    type: Object
   },
-  toGo: {
-    type: Boolean,
-    validate: /^[A-Za-z0-9 ]*$/
+  location: {
+    type: Object
+  },
+  rating: {
+    type: Number
   }
 });
 

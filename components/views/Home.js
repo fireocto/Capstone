@@ -8,6 +8,10 @@ export default state => html`
 
   <div id="wheel-wrapper"></div>
 
+  <div id="spin-it">
+    Spin It!
+  </div>
+
   <h3>
     The weather in ${state.weather.city}: ${state.weather.description}.
     Temperature is ${state.weather.temp}F, and it feels like

@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import favorites from "./routers/favorites.js";
 import yelp from "./routers/yelp.js";
+import contact from "./routers/contact.js";
 
 // Load environment variables from .env file
 dotenv.config();
@@ -111,6 +112,7 @@ app.get("/weather/:city", (request, response) => {
   });
 });
 
+app.use("/contact", contact);
 app.use("/favorites", favorites);
 app.use("/yelp", yelp);
 

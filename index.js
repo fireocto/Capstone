@@ -90,25 +90,31 @@ function afterRender(state) {
   }
 
   if (state.view === "Contact") {
-    document
-      .getElementById("search-button")
-      .addEventListener("click", event => {
-        event.preventDefault();
+    document.querySelector("form").addEventListener("submit", event => {
+      event.preventDefault();
 
-        const input = document.getElementById("favoritesMenu").value;
-        // const filter = document.getElementById("filter").value;
+      const inputList = event.target.elements;
+      console.log("Input Element List", inputList);
 
-        axios
-          .get(`${process.env.DINNER_SPINNER_API}/favorites?category=${input}`)
-          .then(response => {
-            console.log(response.data);
-            store.Favorites.favorites = response.data;
-            router.navigate("/favorites");
-          })
-          .catch(error => {
-            console.log("It puked", error);
-          });
-      });
+      const requestData = {
+        name: inputList.name.value,
+        email: inputList.email.value,
+        phone: inputList.phone.value,
+        textArea: inputList.textArea.value
+      };
+      console.log(requestData);
+
+      axios
+        .post(`${process.env.DINNER_SPINNER_API}/contact`, requestData)
+        .then(response => {
+          //  Then push the new pizza onto the Pizza state pizzas attribute, so it can be displayed in the pizza list
+          store.Contact.contactInfo.push(response.data);
+          router.navigate("/");
+        })
+        .catch(error => {
+          console.log("It puked", error);
+        });
+    });
   }
 
   if (state.view === "Favorites") {

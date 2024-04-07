@@ -1,28 +1,26 @@
 import mongoose from "mongoose";
 
 const contactSchema = new mongoose.Schema({
-  customer: {
+  name: {
     type: String,
     required: true,
     validate: /^[A-Za-z0-9 ]*$/
   },
-  crust: {
+  email: {
     type: String,
-    required: true,
-    enum: ["thin", "chicago", "deep-dish", "hella-thick"]
+    required: true
   },
-  cheese: {
-    type: String,
+  phone: {
+    type: Number,
     validate: /^[A-Za-z0-9 ]*$/
   },
-  sauce: {
+  textArea: {
     type: String,
     required: true,
-    validate: /^[A-Za-z0-9 ]*$/
-  },
-  toppings: [String]
+    validate: /^[A-Za-z0-9 .,]*$/
+  }
 });
 
-const Pizza = mongoose.model("Pizza", contactSchema);
+const Contact = mongoose.model("Contact", contactSchema);
 
-export default Pizza;
+export default Contact;

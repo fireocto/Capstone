@@ -2,8 +2,8 @@ import html from "html-literal";
 
 export default state => html`
   <section id="jumbotron">
-    <h2>Dinner Spinner</h2>
-    <a href="index.html">"Take It For A Spin!" "Button"</a>
+    <h2>Try One of Our Favorites - Click The Wheel To Spin!</h2>
+    <a id="takeToPick" href="/Pick">Or Find a New Favorite!</a>
   </section>
 
   <div id="wheel-wrapper"></div>

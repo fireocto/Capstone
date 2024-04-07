@@ -13,7 +13,7 @@ export default () => html`
       placeholder="you@somewhere.com"
     />
 
-    <label for="fone">Phone:</label>
+    <label for="phone">Phone:</label>
     <input type="tel" name="fone" id="fone" placeholder="555-555-5555" />
 
     <div>

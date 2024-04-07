@@ -59,12 +59,15 @@ function afterRender(state) {
       // console.log(state.restaurants[event.currentIndex]);
       store.Favorites.fav.push(store.Favorites.favorites[event.currentIndex]);
       console.log(store.Favorites.favorites[event.currentIndex]);
-      router.navigate("/");
+      // router.navigate("/");
       // document.querySelector for toggle secret message
       alert(
         store.Favorites.favorites[event.currentIndex].name +
           "\n" +
-          store.Favorites.favorites[event.currentIndex].location
+          store.Favorites.favorites[event.currentIndex].location +
+          "\n" +
+          "Rating: " +
+          store.Favorites.favorites[event.currentIndex].rating
       );
     };
 
@@ -173,12 +176,15 @@ function afterRender(state) {
       store.Pick.selection = [];
       store.Pick.selection.push(state.restaurants[event.currentIndex]);
       console.log(store.Pick.selection);
-      router.navigate("/pick");
+      // router.navigate("/pick");
       // document.querySelector for toggle secret message
       alert(
         state.restaurants[event.currentIndex].name +
           "\n" +
-          state.restaurants[event.currentIndex].location.display_address
+          state.restaurants[event.currentIndex].location.display_address +
+          "\n" +
+          "Rating: " +
+          state.restaurants[event.currentIndex].rating
       );
     };
 
